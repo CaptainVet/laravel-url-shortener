@@ -13,5 +13,6 @@ jobs:
         php_version: 8.1
     - uses: php-actions/phpunit@v3
       with:
+        version: 9
         config: phpunit.xml
         php_version: 8.1
