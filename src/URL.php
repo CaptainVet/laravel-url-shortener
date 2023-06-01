@@ -5,7 +5,6 @@ namespace ArieTimmerman\Laravel\URLShortener;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Webpatser\Uuid\Uuid;
 
 /**
  * Model for the shortened URL and related details
@@ -27,7 +26,7 @@ class URL extends Model
         parent::boot();
         static::creating(
             function (URL $url) {
-                $url->{$url->getKeyName()} = Uuid::generate()->string;
+                $url->{$url->getKeyName()} = (string) Str::uuid();
                 if (!$url->code) {
                     $url->code = $url->generateCode();
                 }
