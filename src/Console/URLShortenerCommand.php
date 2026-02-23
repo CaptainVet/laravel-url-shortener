@@ -27,10 +27,12 @@ class URLShortenerCommand extends Command
      * @param  \Laravel\Passport\ClientRepository  $clients
      * @return void
      */
-    public function handle()
+    public function handle(): int
     {
         $url = URLShortener::shorten($this->argument('url'));
 
         $this->line(sprintf("Shortened to: %s", (string) $url));
+
+        return self::SUCCESS;
     }
 }

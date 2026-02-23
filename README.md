@@ -7,7 +7,7 @@ A minimal Laravel package for shortening URLs. Apart for creating short URLs - l
 
 # Laravel URL Shortener
 
-Install the package. It supports Laravel 5.5 and up (including 7.0 and up).
+Install the package. This branch supports Laravel 10 and Laravel 11.
 
 ~~~
 composer require arietimmerman/laravel-url-shortener

@@ -112,7 +112,7 @@ class URLControllerTest extends TestCase
         $response = $this->delete('/urls/'.$url->id);
         $response->assertStatus(204);
 
-        $this->assertDatabaseMissing($url, ['id' => $url->id]);
+        $this->assertDatabaseMissing('art_urls', ['id' => $url->id]);
     }
 
 }

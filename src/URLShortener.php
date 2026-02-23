@@ -1,6 +1,9 @@
 <?php
 
 namespace ArieTimmerman\Laravel\URLShortener;
+
+use ArieTimmerman\Laravel\URLShortener\Http\Controllers\RedirectController;
+use ArieTimmerman\Laravel\URLShortener\Http\Controllers\URLController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -9,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 class URLShortener
 {
     
-    public static function routes(array $options = [])
+    public static function routes(array $options = []): void
     {
             
         $prefix = config("urlshortener.url_prefix");
@@ -26,7 +29,7 @@ class URLShortener
         
     }
     
-    private static function allRoutes(array $options = [])
+    private static function allRoutes(array $options = []): void
     {
         
         if(config('urlshortener.route_resource_enabled')) {
@@ -37,17 +40,19 @@ class URLShortener
         
     }
     
-    public static function routeResource(array $options = [])
+    public static function routeResource(array $options = []): void
     {
-        Route::resource('urls', \ArieTimmerman\Laravel\URLShortener\Http\Controllers\URLController::class)->except(['edit']);
+        Route::resource('urls', URLController::class)->except(['edit']);
     }
     
-    public static function routeRedirect(array $options = [])
+    public static function routeRedirect(array $options = []): void
     {
 
         $prefixCode = config("urlshortener.url_prefix_code");
 
-        Route::get($prefixCode . '{code}', '\ArieTimmerman\Laravel\URLShortener\Http\Controllers\RedirectController@index')->where('code', '^[^/]+$')->name('urlshortener.redirect');
+        Route::get($prefixCode . '{code}', [RedirectController::class, 'index'])
+            ->where('code', '[^/]+')
+            ->name('urlshortener.redirect');
     }
     
     public static function shorten($url)
